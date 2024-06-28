@@ -6,6 +6,16 @@
         <button class="button" @click="alterarTema">
             {{textoBotao}}
         </button>
+        <nav class="panel mt-5">
+            <ul>
+                <li v-for="link in links" :key="link.name">
+                    <router-link :to="link.path" class="link">
+                        <i :class="['fas', link.icon]"></i>
+                        {{link.name}}
+                    </router-link>
+                </li>
+            </ul>
+        </nav>
     </header>
 </template>
 
@@ -16,7 +26,19 @@
         emits: ['aoTemaAlterado'],
         data(){
             return{
-                modoEscuro: false
+                modoEscuro: false,
+                links: [
+                    {
+                        path: '/',
+                        name: 'Tarefas',
+                        icon: 'fa-tasks'
+                    },
+                    {
+                        path: '/projetos',
+                        name: 'Projetos',
+                        icon: 'fa-project-diagram'
+                    }
+                ]
             }
         },
         computed:{
@@ -47,5 +69,17 @@
             padding: 2.5rem;
             height: auto;
         }
+    }
+
+    .panel li{
+        margin: 8px 0;
+    }
+
+    .link{
+        color: white
+    }
+
+    .link:hover, .link.router-link-active{
+        color: #FAF0CA;
     }
 </style>
